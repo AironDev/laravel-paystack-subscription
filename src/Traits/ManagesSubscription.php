@@ -38,20 +38,38 @@ trait ManagesSubscription
         return $plan ? $subscription->hasPlan($plan) : true;
     }
 
+    // /**
+    //  * Get a subscription instance by name.
+    //  *
+    //  * @param  string  $name
+    //  * @return \Digikraaft\PaystackSubscription\Subscription|null
+    //  */
+    // public function subscription($name = 'default')
+    // {
+    //     return $this->subscriptions->sortByDesc(function (Subscription $subscription) {
+    //         return $subscription->updated_at->getTimestamp();
+    //     })->first(function (Subscription $subscription) use ($name) {
+    //         return $subscription->name === $name;
+    //     });
+    // }
+
+
+
     /**
-     * Get a subscription instance by name.
+     * Get a subscription instance by id.
      *
-     * @param  string  $name
+     * @param  string  $subscription_id
      * @return \Digikraaft\PaystackSubscription\Subscription|null
      */
-    public function subscription($name = 'default')
+    public function subscription($subscription_id = 'default')
     {
         return $this->subscriptions->sortByDesc(function (Subscription $subscription) {
-            return $subscription->created_at->getTimestamp();
-        })->first(function (Subscription $subscription) use ($name) {
-            return $subscription->name === $name;
+            return $subscription->updated_at->getTimestamp();
+        })->first(function (Subscription $subscription) use ($subscription_id) {
+            return $subscription->subscription_id === $subscription_id;
         });
     }
+
 
     /**
      * Get all of the subscriptions for the Paystack model.

@@ -189,20 +189,28 @@
          * @return $this
          */
         public function cancel()
-        {
-            if ($this->isCancelled()) {
-                return $this;
-            }
+        {       
+            // dd($this->subscription_code);
+            // if ($this->isCancelled()) {
+            //     return $this;
+            // }
             $subscription = $this->asPaystackSubscription();
+            // dd($subscription);
 
             Paystack::setApiKey(config('paystacksubscription.secret', env('PAYSTACK_SECRET')));
 
-            PaystackSubscription::disable(
-                [
-                    'code' => $subscription->subscription_code,
-                    'token' => $subscription->email_token,
-                ]
-            );
+            try {
+
+                PaystackSubscription::disable(
+                    [
+                        'code' => $subscription->subscription_code,
+                        'token' => $subscription->email_token,
+                    ]
+                );
+                
+            } catch (Exception $e) {
+                
+            }
 
             $this->syncPaystackStatus();
 
@@ -245,6 +253,8 @@
         public function asPaystackSubscription(array $expand = [])
         {
             Paystack::setApiKey(config('paystacksubscription.secret', env('PAYSTACK_SECRET')));
+
+            // dd(PaystackSubscription::fetch($this->subscription_code)->data);
 
             return PaystackSubscription::fetch($this->subscription_code)->data;
         }
