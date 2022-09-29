@@ -28,8 +28,8 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "digikraaft/laravel-paystack-webhooks": "^1.0",
-        "digikraaft/paystack-php": "^1.0",
+        "digikraaft/laravel-paystack-webhooks": "^2.0",
+        "digikraaft/paystack-php": "^2.1",
         "illuminate/contracts": "^8.0|^9.32",
         "illuminate/database": "^8.0|^9.32",
         "illuminate/http": "^8.0|^9.32",
